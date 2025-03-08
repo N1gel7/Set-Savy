@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Major Set Theory Quiz</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #004080;
+        }
+
+        .content-quiz, .question {
+            background: #fff;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .nav-buttons {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        button {
+            padding: 12px;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #0056b3, #003f8a);
+        }
+
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .correct {
+            color: green;
+        }
+
+        .incorrect {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="majorQuiz" class="section">
+        <h1>Major Set Theory Quiz</h1>
+        <div id="quizContainer" class="content-quiz">
+            <!-- Questions will be injected dynamically by JavaScript -->
+        </div>
+        <div class="nav-buttons">
+            <button onclick="window.location.href='proofsQuiz9.html'">Previous: Basic Proofs Quiz</button>
+            <button onclick="handleMajorQuizSubmission()">Submit Quiz</button>
+        </div>
+    </div>
+    <!-- Results Container -->
+    <div id="resultsContainer" class="content-quiz">
+        <!-- Results will be displayed here after submission -->
+    </div>
+<script src="webApp.js"></script>
+</body>
+</html>

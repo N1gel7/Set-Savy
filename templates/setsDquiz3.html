@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Theory Web App</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 0;
+            margin: 0; 
+            background: linear-gradient(to bottom right, #f0f8ff, #e6f7ff);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #004080;
+        }
+        .content, .content-quiz, .login-container, .box {
+            background: #fff;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+            text-align: left;
+        }
+        p, ul {
+            margin-bottom: 15px;
+        }
+        ul li {
+            margin-bottom: 8px;
+        }
+        .nav-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        button {
+            padding: 12px;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: linear-gradient(135deg, #0056b3, #003f8a);
+        }
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        .section {
+            margin-bottom: 20px; /* Removed display: none; to make content visible */
+        }
+        .login-container {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+        }
+        .login-container input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div id="setTheoryQuiz" class="section">
+        <h1>Set Theory Quiz</h1>
+        <div class="content-quiz">
+            <p>If A = {1, 2, 3} and B = {3, 2, 1}, then A and B are:</p>
+            <label><input type="radio" name="q1" value="a"> a) Equal sets</label><br>
+            <label><input type="radio" name="q1" value="b"> b) Proper subsets</label><br>
+            <label><input type="radio" name="q1" value="c"> c) Subsets</label><br>
+            <label><input type="radio" name="q1" value="d"> d) Disjoint sets</label><br>
+            <button onclick="checkAnswer('q1', 'a')">Submit</button>
+            <p id="feedback-q1" class="feedback"></p>
+        </div>
+        <div class="content-quiz">
+            <h2>Equal Sets (Easy)</h2>
+            <p>If A and B are equal sets, which of the following must be true?</p>
+            <label><input type="radio" name="q2" value="a"> a) A ⊂ B</label><br>
+            <label><input type="radio" name="q2" value="b"> b) A ≠ B</label><br>
+            <label><input type="radio" name="q2" value="c"> c) A = B</label><br>
+            <label><input type="radio" name="q2" value="d"> d) A ∪ B = {}</label><br>
+            <button onclick="checkAnswer('q2', 'c')">Submit</button>
+            <p id="feedback-q2" class="feedback"></p>
+        </div>
+        <div class="content-quiz">
+            <h2>Subsets (Difficult)</h2>
+            <p>If A = {1, 2, 3} and B = {1, 2, 3, 4, 5}, which of the following statements is true?</p>
+            <label><input type="radio" name="q3" value="a"> a) A is a proper subset of B</label><br>
+            <label><input type="radio" name="q3" value="b"> b) B is a subset of A</label><br>
+            <label><input type="radio" name="q3" value="c"> c) A is equal to B</label><br>
+            <label><input type="radio" name="q3" value="d"> d) None of the above</label><br>
+            <button onclick="checkAnswer('q3', 'a')">Submit</button>
+            <p id="feedback-q3" class="feedback"></p>
+        </div>
+        <div class="content-quiz">
+            <h2>Power Set (Difficult)</h2>
+            <p>Which of the following is the power set of A = {1, 2}?</p>
+            <label><input type="radio" name="q4" value="a"> a) {{1}, {2}}</label><br>
+            <label><input type="radio" name="q4" value="b"> b) {{}, {1}, {2}, {1, 2}}</label><br>
+            <label><input type="radio" name="q4" value="c"> c) {{1, 2}}</label><br>
+            <label><input type="radio" name="q4" value="d"> d) None of the above</label><br>
+            <button onclick="checkAnswer('q4', 'b')">Submit</button>
+            <p id="feedback-q4" class="feedback"></p>
+        </div>
+        <div class="content-quiz">
+            <h2>Empty Set (Hard)</h2>
+            <p>The intersection of any set A with the empty set is:</p>
+            <label><input type="radio" name="q5" value="a"> a) A</label><br>
+            <label><input type="radio" name="q5" value="b"> b) ∅</label><br>
+            <label><input type="radio" name="q5" value="c"> c) A ∪ ∅</label><br>
+            <label><input type="radio" name="q5" value="d"> d) None of the above</label><br>
+            <button onclick="checkAnswer('q5', 'b')">Submit</button>
+            <p id="feedback-q5" class="feedback"></p>
+        </div>
+        <div class="content-quiz">
+            <h2>Universal Set (Hard)</h2>
+            <p>Given U = {1, 2, 3, 4, 5, 6} as the universal set, if A = {2, 4} and B = {1, 2, 3}, what is A ∩ B?</p>
+            <label><input type="radio" name="q6" value="a"> a) {1, 2, 3, 4}</label><br>
+            <label><input type="radio" name="q6" value="b"> b) {2}</label><br>
+            <label><input type="radio" name="q6" value="c"> c) {4}</label><br>
+            <label><input type="radio" name="q6" value="d"> d) ∅</label><br>
+            <button onclick="checkAnswer('q6', 'b')">Submit</button>
+            <p id="feedback-q6" class="feedback"></p>
+        </div>
+        
+        </div>
+        <div class="nav-buttons">
+            <button onclick="goToPrevious()">Previous: Definitions</button>
+            <button onclick="goToNext()">Next: Types of Sets</button>
+        </div>
+        
+        
+           
+        
+        
+
+<script src="webApp.js"></script>
+</body>
+</html>

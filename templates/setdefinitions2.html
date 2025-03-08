@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Theory Web App</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 0;
+            margin: 0; 
+            background: linear-gradient(to bottom right, #f0f8ff, #e6f7ff);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #004080;
+        }
+        .content, .content-quiz, .login-container, .box {
+            background: #fff;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+            text-align: left;
+        }
+        p, ul {
+            margin-bottom: 15px;
+        }
+        ul li {
+            margin-bottom: 8px;
+        }
+        .nav-buttons {
+            margin-top: 50px;
+            display: flex;
+            justify-content: flex-end; /* Moves the button to the right */
+            width: 100%;
+        }
+        button {
+            padding: 12px;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: linear-gradient(135deg, #0056b3, #003f8a);
+        }
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        .section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <div id="setDefinitions" class="section">
+        <h1>Set Theory Definitions</h1>
+        <div class="content-wrapper" style="display: flex; flex-wrap: wrap; gap: 20px; max-width: 1200px; justify-content: center;">
+            <!-- Top Left Box -->
+            <div class="box" style="flex: 0 0 48%; padding: 15px; border: 1px solid #ccc; border-radius: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin: 10px;">
+                <h2>Set Definitions</h2>
+                <p><b>Set:</b> A set is simply a collection of unique items, organized neatly in curly brackets <code>{}</code>. No duplicates allowed!</p>
+                <p><b>Example:</b> <code>{apple, banana, cherry}</code> represents a set of three distinct fruits.</p>
+                <p><b>Element:</b> An element is an individual item in a set, represented by ∈ when we want to say it’s part of the set.</p>
+                <p><b>Example:</b> If <code>A = {1, 2, 3}</code>, then 2 ∈ A means "2 is an element of set A."</p>
+            </div>
+            <!-- Top Right Box -->
+            <div class="box" style="flex: 0 0 48%; padding: 15px; border: 1px solid #ccc; border-radius: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin: 10px;">
+                <p><b>Empty Set:</b> The empty set (or null set) has no elements, so it’s represented by <code>{}</code> or ∅.</p>
+                <p><b>Example:</b> <code>{}</code> or ∅ simply means an empty set.</p>
+                <p><b>Universal Set:</b> The universal set U contains all elements within the context we’re working with, sort of like our “everything” set.</p>
+                <p><b>Example:</b> If we’re looking at all integers, U would include all integers, positive, negative, and zero.</p>
+            </div>
+            <!-- Bottom Left Box -->
+            <div class="box" style="flex: 0 0 48%; padding: 15px; border: 1px solid #ccc; border-radius: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin: 10px;">
+                <p><b>Subset:</b> If every item in set A is also in set B, then A is considered a subset of B, denoted A ⊆ B.</p>
+                <p><b>Example:</b> <code>{1, 2}</code> ⊆ <code>{1, 2, 3}</code> means every element in <code>{1, 2}</code> is found in <code>{1, 2, 3}</code>.</p>
+                <p><b>Proper Subset:</b> A subset that doesn’t contain all elements of the other set. In other words, A ⊂ B means A is a subset of B but is not equal to B.</p>
+                <p><b>Example:</b> <code>{1, 2}</code> ⊂ <code>{1, 2, 3}</code> (because <code>{1, 2}</code> is part of <code>{1, 2, 3}</code>, but not all of it).</p>
+            </div>
+            <!-- Bottom Right Box -->
+            <div class="box" style="flex: 0 0 48%; padding: 15px; border: 1px solid #ccc; border-radius: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin: 10px;">
+                <p><b>Power Set:</b> The power set of A includes all possible subsets of A, including the empty set and A itself.</p>
+                <p><b>Example:</b> For <code>A = {1, 2}</code>, the power set <code>P(A) = {{}, {1}, {2}, {1, 2}}</code>.</p>
+            </div>
+        </div>
+        <div class="nav-buttons">
+            <button onclick="goToQuiz()">Next: Quiz</button>
+        </div>
+    </div>
+    <script src="webApp.js"></script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Identities - Set Theory Web App</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #007bff;
+            border-radius: 8px;
+            background-color: #ffffff;
+            max-width: 900px;
+        }
+
+        .set-identities-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .set-identities-table caption {
+            caption-side: top;
+            font-weight: bold;
+            color: #007bff;
+            text-align: left;
+            margin-bottom: 5px;
+        }
+
+        .set-identities-table th, .set-identities-table td {
+            border: 1px solid #007bff;
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .set-identities-table th {
+            background-color: #e6f7ff;
+            color: #004080;
+        }
+
+        .set-identities-table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .nav-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            padding: 12px;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #0056b3, #003f8a);
+        }
+    </style>
+</head>
+<body>
+    <div id="proofs" class="section">
+        <div class="container">
+            <h1>Set Identities</h1>
+            <table class="set-identities-table">
+                <caption>Set Identities</caption>
+                <thead>
+                    <tr>
+                        <th>Identity</th>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>A ∩ U = A<br>A ∪ ∅ = A</td>
+                        <td>Identity laws</td>
+                    </tr>
+                    <tr>
+                        <td>A ∪ U = U<br>A ∩ ∅ = ∅</td>
+                        <td>Domination laws</td>
+                    </tr>
+                    <tr>
+                        <td>A ∪ A = A<br>A ∩ A = A</td>
+                        <td>Idempotent laws</td>
+                    </tr>
+                    <tr>
+                        <td><span style="text-decoration: overline;">(A)</span> = A</td>
+                        <td>Complementation law</td>
+                    </tr>
+                    <tr>
+                        <td>A ∪ B = B ∪ A<br>A ∩ B = B ∩ A</td>
+                        <td>Commutative laws</td>
+                    </tr>
+                    <tr>
+                        <td>A ∪ (B ∪ C) = (A ∪ B) ∪ C<br>A ∩ (B ∩ C) = (A ∩ B) ∩ C</td>
+                        <td>Associative laws</td>
+                    </tr>
+                    <tr>
+                        <td>A ∪ (B ∩ C) = (A ∪ B) ∩ (A ∪ C)<br>A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C)</td>
+                        <td>Distributive laws</td>
+                    </tr>
+                    <tr>
+                        <td><span style="text-decoration: overline;">(A ∪ B)</span> = <span style="text-decoration: overline;">A</span> ∩ <span style="text-decoration: overline;">B</span><br><span style="text-decoration: overline;">(A ∩ B)</span> = <span style="text-decoration: overline;">A</span> ∪ <span style="text-decoration: overline;">B</span></td>
+                        <td>De Morgan’s laws</td>
+                    </tr>
+                    <tr>
+                        <td>A ∪ (A ∩ B) = A<br>A ∩ (A ∪ B) = A</td>
+                        <td>Absorption laws</td>
+                    </tr>
+                    <tr>
+                        <td>A ∪ <span style="text-decoration: overline;">A</span> = U<br>A ∩ <span style="text-decoration: overline;">A</span> = ∅</td>
+                        <td>Complement laws</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="nav-buttons">
+                <button onclick="showPrevious()">Previous</button>
+                <button onclick="showNext()">Next</button>
+            </div>
+        </div>
+    </div>
+<script src="webApp.js"></script>
+</body>
+</html>

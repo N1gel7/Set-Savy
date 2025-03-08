@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Additional Set Theory Quiz - Set Theory Web App</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 0;
+            margin: 0; 
+            background: linear-gradient(to bottom right, #f0f8ff, #e6f7ff);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #004080;
+        }
+        .content-quiz {
+            background: #fff;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+            text-align: left;
+        }
+        p, ul {
+            margin-bottom: 15px;
+        }
+        ul li {
+            margin-bottom: 8px;
+        }
+        .nav-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 800px;
+        }
+        button {
+            padding: 12px;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: linear-gradient(135deg, #0056b3, #003f8a);
+        }
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="additionalQuiz" class="section">
+        <h1> Set Notation Quiz</h1>
+        <div class="content-quiz">
+            <p>Which of the following represents an empty set?</p>
+            <label><input type="radio" name="aq1" value="a"> a) {0}</label><br>
+            <label><input type="radio" name="aq1" value="b"> b) { }</label><br>
+            <label><input type="radio" name="aq1" value="c"> c) {1}</label><br>
+            <label><input type="radio" name="aq1" value="d"> d) {null}</label><br>
+            <button onclick="checkAnswer('aq1', 'b')">Submit</button>
+            <p id="feedback-aq1" class="feedback"></p>
+        </div>
+        <div class="content-quiz">
+            <p>If 3 ∈ A and A = {1, 2, 3, 4}, which of the following statements is correct?</p>
+            <label><input type="radio" name="aq2" value="a"> a) 5 ∈ A</label><br>
+            <label><input type="radio" name="aq2" value="b"> b) 2 ∉ A</label><br>
+            <label><input type="radio" name="aq2" value="c"> c) 3 ∉ A</label><br>
+            <label><input type="radio" name="aq2" value="d"> d) 3 ∈ A</label><br>
+            <button onclick="checkAnswer('aq2', 'd')">Submit</button>
+            <p id="feedback-aq2" class="feedback"></p>
+        </div>
+        <div class="content-quiz">
+            <p>Let A = {1, 3, 5} and B = {2, 3, 4}. What is A ∩ B?</p>
+            <label><input type="radio" name="aq3" value="a"> a) {1, 3, 5}</label><br>
+            <label><input type="radio" name="aq3" value="b"> b) {3}</label><br>
+            <label><input type="radio" name="aq3" value="c"> c) {1, 2, 3, 4, 5}</label><br>
+            <label><input type="radio" name="aq3" value="d"> d) {}</label><br>
+            <button onclick="checkAnswer('aq3', 'b')">Submit</button>
+            <p id="feedback-aq3" class="feedback"></p>
+        </div>
+        <div class="content-quiz">
+            <p>Which of the following is true about the power set P({a, b})?</p>
+            <label><input type="radio" name="aq4" value="a"> a) P({a, b}) = {{a, b}}</label><br>
+            <label><input type="radio" name="aq4" value="b"> b) P({a, b}) = {a, b}</label><br>
+            <label><input type="radio" name="aq4" value="c"> c) P({a, b}) = {{}, {a}, {b}, {a, b}}</label><br>
+            <label><input type="radio" name="aq4" value="d"> d) P({a, b}) = {{}, {a, b}}</label><br>
+            <button onclick="checkAnswer('aq4', 'c')">Submit</button>
+            <p id="feedback-aq4" class="feedback"></p>
+        </div>
+        <div class="content-quiz">
+            <p>Given sets A = {x, y, z} and B = {y, z}, which statement is true?</p>
+            <label><input type="radio" name="aq5" value="a"> a) A ⊂ B</label><br>
+            <label><input type="radio" name="aq5" value="b"> b) A ⊆ B</label><br>
+            <label><input type="radio" name="aq5" value="c"> c) B ⊆ A</label><br>
+            <label><input type="radio" name="aq5" value="d"> d) B ⊈ A</label><br>
+            <button onclick="checkAnswer('aq5', 'c')">Submit</button>
+            <p id="feedback-aq5" class="feedback"></p>
+        </div>
+        <div class="nav-buttons">
+            <button onclick="showSetNotations()">Previous: Set Notations</button>
+            <button onclick="showProofs()">Next: Basic Proofs and Properties</button>
+        </div>
+        
+    </div>
+
+<script src="webApp.js"></script>
+</body>
+</html>

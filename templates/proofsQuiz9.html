@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Theory Quiz: Basic Proofs and Properties</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        .content-quiz, .question {
+            background: #fff;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+        }
+        .nav-buttons {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            padding: 12px;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: linear-gradient(135deg, #0056b3, #003f8a);
+        }
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        .solution {
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="basicProofQuiz" class="section">
+        <div class="content-quiz">
+            <h1>Set Theory Quiz: Basic Proofs and Properties</h1>
+            <p>Use set builder notation and logical equivalences to establish the first De Morgan law: <b>(A ∪ B)' = A' ∩ B'</b>.</p>
+            <button onclick="toggleSolution()">View Solution</button>
+            <div id="solution" class="solution">
+                <p>Solution:</p>
+                <img src="real solutions.jpg" alt="Solution Image" />
+            </div>
+        </div>
+        <div class="question">
+            <p>Which of the following correctly demonstrates the Union Idempotent Law?</p>
+            <label><input type="radio" name="bpq1" value="a"> a) A ∪ B = B ∪ A</label><br>
+            <label><input type="radio" name="bpq1" value="b"> b) A ∪ A = A</label><br>
+            <label><input type="radio" name="bpq1" value="c"> c) A ∩ B = A</label><br>
+            <label><input type="radio" name="bpq1" value="d"> d) (A ∪ B) ∪ C = A ∪ (B ∪ C)</label><br>
+            <button onclick="checkAnswer('bpq1', 'b')">Submit</button>
+            <p id="feedback-bpq1" class="feedback"></p>
+        </div>
+        <div class="question">
+            <p>When are two sets A and B considered equal?</p>
+            <label><input type="radio" name="bpq2" value="a"> a) If A ⊆ B and B ⊆ A</label><br>
+            <label><input type="radio" name="bpq2" value="b"> b) If they contain at least one common element</label><br>
+            <label><input type="radio" name="bpq2" value="c"> c) If the number of elements in each set is the same</label><br>
+            <label><input type="radio" name="bpq2" value="d"> d) If A ∩ B = ∅</label><br>
+            <button onclick="checkAnswer('bpq2', 'a')">Submit</button>
+            <p id="feedback-bpq2" class="feedback"></p>
+        </div>
+        <div class="question">
+            <p>Which of the following statements is true according to the Commutative Laws?</p>
+            <label><input type="radio" name="bpq3" value="a"> a) A ∩ B = A ∪ B</label><br>
+            <label><input type="radio" name="bpq3" value="b"> b) (A ∩ B) ∩ C = A ∩ (B ∩ C)</label><br>
+            <label><input type="radio" name="bpq3" value="c"> c) A ∩ B = B ∩ A</label><br>
+            <label><input type="radio" name="bpq3" value="d"> d) A ⊆ B implies B ⊆ A</label><br>
+            <button onclick="checkAnswer('bpq3', 'c')">Submit</button>
+            <p id="feedback-bpq3" class="feedback"></p>
+        </div>
+        <div class="question">
+            <p>If A = {1, 2} and B = {1, 2, 3}, which of the following statements is true?</p>
+            <label><input type="radio" name="bpq4" value="a"> a) B ⊆ A</label><br>
+            <label><input type="radio" name="bpq4" value="b"> b) A ∩ B = ∅</label><br>
+            <label><input type="radio" name="bpq4" value="c"> c) A ⊆ B</label><br>
+            <label><input type="radio" name="bpq4" value="d"> d) A = B</label><br>
+            <button onclick="checkAnswer('bpq4', 'c')">Submit</button>
+            <p id="feedback-bpq4" class="feedback"></p>
+        </div>
+    </div>
+        
+     <div class="nav-buttons">
+            <button id="previous-quiz">Previous: Additional Quiz</button>
+            <a href="http://localhost:3000/cal" target="_parent" rel="noopener noreferrer">
+                <button >Set Calculator</button>
+            </a>
+
+            <a href="http://localhost:3000/int" target="_parent" rel="noopener noreferrer">
+                <button >Interactive Quizzes</button>
+            </a>
+
+            <button id="major-quiz">Major Quiz</button>
+        </div>
+    </div>
+
+   
+
+<script src="webApp.js"></script>
+</body>
+</html>

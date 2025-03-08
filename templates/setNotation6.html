@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Notations - Set Theory Web App</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 0;
+            margin: 0; 
+            background: linear-gradient(to bottom right, #f0f8ff, #e6f7ff);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #004080;
+        }
+        .content-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1200px;
+            width: 100%;
+            padding: 20px;
+        }
+        .box {
+            background: #fff;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+            text-align: left;
+        }
+        .nav-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 800px;
+        }
+        button {
+            padding: 12px;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: linear-gradient(135deg, #0056b3, #003f8a);
+        }
+    </style>
+</head>
+<body>
+    <div class="content-container">
+        <div id="setNotations" class="section">
+            <h1>Set Notations</h1>
+            <!-- Box 1 -->
+            <div class="box">
+                <p><b>{} or ∅:</b> This represents the empty set, which has no elements.</p>
+                <p><b>Example:</b> <code>{}</code> or <code>∅</code>.</p>
+            </div>
+            <!-- Box 2 -->
+            <div class="box">
+                <p><b>∈:</b> This symbol indicates that an item is in the set.</p>
+                <p><b>Example:</b> <code>5 ∈ {3, 4, 5, 6}</code>.</p>
+            </div>
+            <!-- Box 3 -->
+            <div class="box">
+                <p><b>∉:</b> This indicates that an item is not in the set.</p>
+                <p><b>Example:</b> <code>8 ∉ {3, 4, 5, 6}</code>.</p>
+            </div>
+            <!-- Box 4 -->
+            <div class="box">
+                <p><b>⊆:</b> A subset symbol, meaning all elements of <code>A</code> are also in <code>B</code>.</p>
+                <p><b>Example:</b> <code>{apple, banana} ⊆ {apple, banana, cherry}</code>.</p>
+            </div>
+            <!-- Box 5 -->
+            <div class="box">
+                <p><b>⊂:</b> Proper subset, indicating <code>A</code> is a subset of <code>B</code> but not equal to <code>B</code>.</p>
+                <p><b>Example:</b> <code>{apple} ⊂ {apple, banana}</code>.</p>
+            </div>
+            <!-- Box 6 -->
+            <div class="box">
+                <p><b>∪:</b> Union, combining all elements from two sets.</p>
+                <p><b>Example:</b> <code>{1, 2} ∪ {2, 3} = {1, 2, 3}</code>.</p>
+            </div>
+            <!-- Box 7 -->
+            <div class="box">
+                <p><b>∩:</b> Intersection, representing elements common to both sets.</p>
+                <p><b>Example:</b> <code>{1, 2, 3} ∩ {2, 3, 4} = {2, 3}</code>.</p>
+            </div>
+            <!-- Box 8 -->
+            <div class="box">
+                <p><b>- or \:</b> The difference, or what one set has that the other doesn’t.</p>
+                <p><b>Example:</b> <code>{1, 2, 3} - {2, 3} = {1}</code>.</p>
+            </div>
+            <!-- Box 9 -->
+            <div class="box">
+                <p><b>P(A):</b> Power set of <code>A</code>, which includes every possible subset of <code>A</code>.</p>
+                <p><b>Example:</b> For <code>A = {x, y}</code>, <code>P(A) = {{}, {x}, {y}, {x, y}}</code>.</p>
+            </div>
+            <!-- Navigation Buttons -->
+            <div class="nav-buttons">
+                <button onclick="showSubsetQuiz()">Previous: Subset Quiz</button>
+                <button onclick="showAdditionalQuiz()">Next: Additional Quiz</button>
+            </div>
+        </div>
+    </div>
+<script src="webApp.js"></script>
+</body>
+</html>

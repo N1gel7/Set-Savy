@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Theory Web App</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 0;
+            margin: 0; 
+            background: linear-gradient(to bottom right, #f0f8ff, #e6f7ff);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #004080;
+        }
+        .content, .content-quiz, .login-container,.box{
+            background: #fff;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+            text-align: left;
+        }
+        p, ul {
+            margin-bottom: 15px;
+        }
+        ul li {
+            margin-bottom: 8px;
+        }
+        .nav-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        button {
+            padding: 12px;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: linear-gradient(135deg, #0056b3, #003f8a);
+        }
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        .section {
+            display: none;
+            margin-bottom: 20px;
+        }
+        .login-container {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+        }
+        .login-container input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div id="loginSection" class="login-container" style="display: block;">
+        <h2>Login to Set Theory Web App</h2>
+        <form onsubmit="return handleLogin(event)">
+            <input type="text" id="name" name="name" placeholder="Name" required>
+            <input type="email" id="email" name="email" placeholder="Email" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    <div id="setDefinitions" class="section" style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+        <h1>Set Theory Definitions</h1>
+        <div class="content-wrapper" style="display: flex; flex-wrap: wrap; gap: 20px; max-width: 1200px; justify-content: center;">
+            <!-- Top Left Box -->
+            <div class="box" style="flex: 0 0 48%; padding: 15px; border: 1px solid #ccc; border-radius: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin: 10px;">
+                <h2>Set Definitions</h2>
+                <p><b>Set:</b> A set is simply a collection of unique items, organized neatly in curly brackets <code>{}</code>. No duplicates allowed!</p>
+                <p><b>Example:</b> <code>{apple, banana, cherry}</code> represents a set of three distinct fruits.</p>
+                <p><b>Element:</b> An element is an individual item in a set, represented by ∈ when we want to say it’s part of the set.</p>
+                <p><b>Example:</b> If <code>A = {1, 2, 3}</code>, then 2 ∈ A means "2 is an element of set A."</p>
+            </div>
+            <!-- Top Right Box -->
+            <div class="box" style="flex: 0 0 48%; padding: 15px; border: 1px solid #ccc; border-radius: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin: 10px;">
+                <p><b>Empty Set:</b> The empty set (or null set) has no elements, so it’s represented by <code>{}</code> or ∅.</p>
+                <p><b>Example:</b> <code>{}</code> or ∅ simply means an empty set.</p>
+                <p><b>Universal Set:</b> The universal set U contains all elements within the context we’re working with, sort of like our “everything” set.</p>
+                <p><b>Example:</b> If we’re looking at all integers, U would include all integers, positive, negative, and zero.</p>
+            </div>
+            <!-- Bottom Left Box -->
+            <div class="box" style="flex: 0 0 48%; padding: 15px; border: 1px solid #ccc; border-radius: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin: 10px;">
+                <p><b>Subset:</b> If every item in set A is also in set B, then A is considered a subset of B, denoted A ⊆ B.</p>
+                <p><b>Example:</b> <code>{1, 2}</code> ⊆ <code>{1, 2, 3}</code> means every element in <code>{1, 2}</code> is found in <code>{1, 2, 3}</code>.</p>
+                <p><b>Proper Subset:</b> A subset that doesn’t contain all elements of the other set. In other words, A ⊂ B means A is a subset of B but is not equal to B.</p>
+                <p><b>Example:</b> <code>{1, 2}</code> ⊂ <code>{1, 2, 3}</code> (because <code>{1, 2}</code> is part of <code>{1, 2, 3}</code>, but not all of it).</p>
+            </div>
+            <!-- Bottom Right Box -->
+            <div class="box" style="flex: 0 0 48%; padding: 15px; border: 1px solid #ccc; border-radius: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin: 10px;">
+                <p><b>Power Set:</b> The power set of A includes all possible subsets of A, including the empty set and A itself.</p>
+                <p><b>Example:</b> For <code>A = {1, 2}</code>, the power set <code>P(A) = {{}, {1}, {2}, {1, 2}}</code>.</p>
+            </div>
+        </div>
+        <div class="nav-buttons" style="margin-top: 50px;">
+            <button onclick="showQuiz()" >Next: Quiz</button>
+        </div>
+        
+        
+    </div>
+    
+    
+   
+    <div id="setTheoryQuiz" class="section">
+        <h1>Set Theory Quiz</h1>
+        <div class="content-quiz">
+            <p>If A = {1, 2, 3} and B = {3, 2, 1}, then A and B are:</p>
+            <label><input type="radio" name="q1" value="a"> a) Equal sets</label><br>
+            <label><input type="radio" name="q1" value="b"> b) Proper subsets</label><br>
+            <label><input type="radio" name="q1" value="c"> c) Subsets</label><br>
+            <label><input type="radio" name="q1" value="d"> d) Disjoint sets</label><br>
+            <button onclick="checkAnswer('q1', 'a')">Submit</button>
+            <p id="feedback-q1" class="feedback"></p>
+        </div>
+        <div class="content-quiz">
+            <h2>Equal Sets (Easy)</h2>
+            <p>If A and B are equal sets, which of the following must be true?</p>
+            <label><input type="radio" name="q2" value="a"> a) A ⊂ B</label><br>
+            <label><input type="radio" name="q2" value="b"> b) A ≠ B</label><br>
+            <label><input type="radio" name="q2" value="c"> c) A = B</label><br>
+            <label><input type="radio" name="q2" value="d"> d) A ∪ B = {}</label><br>
+            <button onclick="checkAnswer('q2', 'c')">Submit</button>
+            <p id="feedback-q2" class="feedback"></p>
+        </div>
+        <div class="content-quiz">
+            <h2>Prime Numbers (Medium)</h2>
+            <p>If A = {x | x is a prime number less than 10} and B = {2, 3, 5, 7}, which of the following statements is true?</p>
+            <label><input type="radio" name="q3" value="a"> a) A ≠ B</label><br>
+            <label><input type="radio" name="q3" value="b"> b) A = B</label><br>
+            <label><input type="radio" name="q3" value="c"> c) A ∪ B = {}</label><br>
+            <label><input type="radio" name="q3" value="d"> d) None of the above</label><br>
+            <button onclick="checkAnswer('q3', 'b')">Submit</button>
+            <p id="feedback-q3" class="feedback"></p>
+        </div>
+        <div class="content-quiz">
+            <h2>Equal Sets (Medium)</h2>
+            <p>If two sets A and B have exactly the same elements, then they are:</p>
+            <label><input type="radio" name="q4" value="a"> a) Complementary sets</label><br>
+            <label><input type="radio" name="q4" value="b"> b) Equal sets</label><br>
+            <label><input type="radio" name="q4" value="c"> c) Proper subsets of each other</label><br>
+            <label><input type="radio" name="q4" value="d"> d) None of the above</label><br>
+            <button onclick="checkAnswer('q4', 'b')">Submit</button>
+            <p id="feedback-q4" class="feedback"></p>
+        </div>
+        <div class="content-quiz">
+            <h2>Equal Sets (Hard)</h2>
+            <p>Given that A = {x | x is a natural number divisible by 5} and B = {5, 10, 15, 20, 25}, if C = {x | x < 30}, which pair among (A, B) and (B, C) can be considered as equal sets?</p>
+            <label><input type="radio" name="q5" value="a"> a) A and B</label>
+            <label><input type="radio" name="q5" value="b"> b) B and C</label>
+            <label><input type="radio" name="q5" value="c"> c) Both</label>
+            <label><input type="radio" name="q5" value="d"> d) Neither</label>
+            <button onclick="checkAnswer('q5', 'd')">Submit</button>
+            <p id="feedback-q5" class="feedback"></p>
+        </div>
+        <div class="nav-buttons">
+            <button onclick="showDefinitions()">Previous: Definitions</button>
+            <button onclick="showTypes()">Next: Types of Sets</button>
+        </div>
+    </div>
+    <div id="typesOfSets" class="section">
+        <h1>Exploring Types of Sets</h1>
+        <div class="content-wrapper" style="display: flex; flex-wrap: wrap; gap: 50px;">
+            <!-- Box 1 -->
+            <div class="boxx" style="background: #fff; padding: 20px; margin: 10px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);" >
+                <p><b>Finite Set:</b> A set with a limited, countable number of elements.</p>
+                <p><b>Example:</b> <code>{red, green, blue}</code> is finite because it has three specific elements.</p>
+            </div>
+            <!-- Box 2 -->
+            <div class="boxx" style="background: #fff; padding: 20px; margin: 10px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);" >
+                <p><b>Infinite Set:</b> A set that goes on without end, like the set of natural numbers <code>{1, 2, 3, ...}</code>.</p>
+            </div>
+            <!-- Box 3 -->
+            <div class="boxx"  style="background: #fff; padding: 20px; margin: 10px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+                <p><b>Equal Sets:</b> Two sets that contain exactly the same elements. Order doesn’t matter, just the contents.</p>
+                <p><b>Example:</b> <code>{a, b, c}</code> and <code>{c, a, b}</code> are equal.</p>
+            </div>
+            <!-- Box 4 -->
+            <div class="boxx"  style="background: #fff; padding: 20px; margin: 10px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+                <p><b>Equivalent Sets:</b> Sets that have the same number of elements, though the elements themselves might differ.</p>
+                <p><b>Example:</b> <code>{dog, cat, bird}</code> and <code>{red, blue, green}</code> are equivalent because each has three items.</p>
+            </div>
+            <!-- Box 5 -->
+            <div class="boxx" style="background: #fff; padding: 20px; margin: 10px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);" >
+                <p><b>Singleton Set:</b> A set with just a single element.</p>
+                <p><b>Example:</b> <code>{x}</code> where <code>x</code> could be any element, but there’s only one.</p>
+            </div>
+            <!-- Box 6 -->
+            <div class="boxx"  style="background: #fff; padding: 20px; margin: 10px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+                <p><b>Disjoint Sets:</b> Sets that have no elements in common—no overlap.</p>
+                <p><b>Example:</b> <code>{1, 2, 3}</code> and <code>{4, 5, 6}</code> have nothing in common, so they’re disjoint.</p>
+            </div>
+            <!-- Box 7 -->
+            <div class="boxx"  style="background: #fff; padding: 20px; margin: 10px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);" >
+                <p><b>Overlapping Sets:</b> Sets that share at least one common element.</p>
+                <p><b>Example:</b> <code>{1, 2, 3}</code> and <code>{2, 4, 6}</code> overlap because they both contain <code>2</code>.</p>
+            </div>
+        </div>
+        
+        <div class="nav-buttons">
+            <button onclick="showQuiz()">Previous: Quiz</button>
+            <button onclick="showSubsetQuiz()">Next Quiz</button>
+        </div>
+    </div>
+    <div id="subsetQuiz" class="section">
+        <h1>Subset Quiz</h1>
+        <div class="content-quiz">
+            <h2>Subset (Easy)</h2>
+            <p>Which of the following is a subset of {1, 2, 3}?</p>
+            <label><input type="radio" name="q6" value="a"> a) {1}</label><br>
+            <label><input type="radio" name="q6" value="b"> b) {4}</label><br>
+            <label><input type="radio" name="q6" value="c"> c) {1, 2, 4}</label><br>
+            <label><input type="radio" name="q6" value="d"> d) {4, 5, 6}</label><br>
+            <button onclick="checkAnswer('q6', 'a')">Submit</button>
+            <p id="feedback-q6" class="feedback"></p>
+        </div>
+        <div class="content-quiz">
+            <h2>Subset (Easy)</h2>
+            <p>If A = {2, 4, 6} and B = {2, 4, 6, 8}, which of the following is true?</p>
+            <label><input type="radio" name="q7" value="a"> a) A is not a subset of B</label><br>
+            <label><input type="radio" name="q7" value="b"> b) B is a subset of A</label><br>
+            <label><input type="radio" name="q7" value="c"> c) A ⊆ B</label><br>
+            <label><input type="radio" name="q7" value="d"> d) None of the above</label><br>
+            <button onclick="checkAnswer('q7', 'c')">Submit</button>
+            <p id="feedback-q7" class="feedback"></p>
+        </div>
+        <div class="content-quiz">
+            <h2>Subset (Medium)</h2>
+            <p>Given sets A = {x | x is a positive even number} and B = {2, 4, 6, 8, 10}, which statement is correct?</p>
+            <label><input type="radio" name="q8" value="a"> a) B is a subset of A</label><br>
+            <label><input type="radio" name="q8" value="b"> b) A is a subset of B</label><br>
+            <label><input type="radio" name="q8" value="c"> c) A and B are equal</label><br>
+            <label><input type="radio" name="q8" value="d"> d) None of the above</label><br>
+            <button onclick="checkAnswer('q8', 'a')">Submit</button>
+            <p id="feedback-q8" class="feedback"></p>
+        </div>
+        <div class="content-quiz">
+            <h2>Subset (Medium)</h2>
+            <p>If A ⊆ B and B = {1, 2, 3, 4, 5}, which of the following could represent A?</p>
+            <label><input type="radio" name="q9" value="a"> a) {1, 2}</label><br>
+            <label><input type="radio" name="q9" value="b"> b) {1, 2, 6}</label><br>
+            <label><input type="radio" name="q9" value="c"> c) {6, 7, 8}</label><br>
+            <label><input type="radio" name="q9" value="d"> d) None of the above</label><br>
+            <button onclick="checkAnswer('q9', 'a')">Submit</button>
+            <p id="feedback-q9" class="feedback"></p>
+        </div>
+        <div class="content-quiz">
+            <h2>Subset (Hard)</h2>
+            <p>Which of the following statements is true if A = {x | x is an odd number} and B = {x | x is a prime number}?</p>
+            <label><input type="radio" name="q10" value="a"> a) A ⊆ B</label><br>
+            <label><input type="radio" name="q10" value="b"> b) B ⊆ A</label><br>
+            <label><input type="radio" name="q10" value="c"> c) A and B are equal</label><br>
+            <label><input type="radio" name="q10" value="d"> d) None of the above</label><br>
+            <button onclick="checkAnswer('q10', 'b')">Submit</button>
+            <p id="feedback-q10" class="feedback"></p>
+        </div>
+        <div class="nav-buttons">
+            <button onclick="showTypes()">Previous: Types of Sets</button>
+            <button onclick="showSetNotations()">Next Section</button>
+        </div>
+    </div>
+    <div id="setNotations" class="section">
+        <h1>Set Notations</h1>
+        <div class="content">
+            <h2>Symbols and Notations in Set Theory</h2>
+            <p><b>{} or ∅:</b> This represents the empty set, which has no elements.</p>
+            <p><b>Example:</b> <code>{}</code> or <code>∅</code>.</p>
+            <p><b>∈:</b> This symbol indicates that an item is in the set.</p>
+            <p><b>Example:</b> <code>5 ∈ {3, 4, 5, 6}</code>.</p>
+            <p><b>∉:</b> This indicates that an item is not in the set.</p>
+            <p><b>Example:</b> <code>8 ∉ {3, 4, 5, 6}</code>.</p>
+            <p><b>⊆:</b> A subset symbol, meaning all elements of <code>A</code> are also in <code>B</code>.</p>
+            <p><b>Example:</b> <code>{apple, banana} ⊆ {apple, banana, cherry}</code>.</p>
+            <p><b>⊂:</b> Proper subset, indicating <code>A</code> is a subset of <code>B</code> but not equal to <code>B</code>.</p>
+            <p><b>Example:</b> <code>{apple} ⊂ {apple, banana}</code>.</p>
+            <p><b>∪:</b> Union, combining all elements from two sets.</p>
+            <p><b>Example:</b> <code>{1, 2} ∪ {2, 3} = {1, 2, 3}</code>.</p>
+            <p><b>∩:</b> Intersection, representing elements common to both sets.</p>
+            <p><b>Example:</b> <code>{1, 2, 3} ∩ {2, 3, 4} = {2, 3}</code>.</p>
+            <p><b>- or \:</b> The difference, or what one set has that the other doesn’t.</p>
+            <p><b>Example:</b> <code>{1, 2, 3} - {2, 3} = {1}</code>.</p>
+            <p><b>P(A):</b> Power set of <code>A</code>, which includes every possible subset of <code>A</code>.</p>
+            <p><b>Example:</b> For <code>A = {x, y}</code>, <code>P(A) = {{}, {x}, {y}, {x, y}}</code>.</p>
+        </div>
+        <div class="nav-buttons">
+            <button onclick="showSubsetQuiz()">Previous: Subset Quiz</button>
+            <button onclick="showAdditionalQuiz()">Next: Additional Quiz</button>
+        </div>
+    </div>
+    <div id="additionalQuiz" class="section">
+        <h1>Additional Set Theory Quiz</h1>
+        <div class="content-quiz">
+            <p>Which of the following represents an empty set?</p>
+            <label><input type="radio" name="aq1" value="a"> a) {0}</label><br>
+            <label><input type="radio" name="aq1" value="b"> b) { }</label><br>
+            <label><input type="radio" name="aq1" value="c"> c) {1}</label><br>
+            <label><input type="radio" name="aq1" value="d"> d) {null}</label><br>
+            <button onclick="checkAnswer('aq1', 'b')">Submit</button>
+            <p id="feedback-aq1" class="feedback"></p>
+        </div>
+        <div class="content-quiz">
+            <p>If 3 ∈ A and A = {1, 2, 3, 4}, which of the following statements is correct?</p>
+            <label><input type="radio" name="aq2" value="a"> a) 5 ∈ A</label><br>
+            <label><input type="radio" name="aq2" value="b"> b) 2 ∉ A</label><br>
+            <label><input type="radio" name="aq2" value="c"> c) 3 ∉ A</label><br>
+            <label><input type="radio" name="aq2" value="d"> d) 3 ∈ A</label><br>
+            <button onclick="checkAnswer('aq2', 'd')">Submit</button>
+            <p id="feedback-aq2" class="feedback"></p>
+        </div>
+        <div class="content-quiz">
+            <p>Let A = {1, 3, 5} and B = {2, 3, 4}. What is A ∩ B?</p>
+            <label><input type="radio" name="aq3" value="a"> a) {1, 3, 5}</label><br>
+            <label><input type="radio" name="aq3" value="b"> b) {3}</label><br>
+            <label><input type="radio" name="aq3" value="c"> c) {1, 2, 3, 4, 5}</label><br>
+            <label><input type="radio" name="aq3" value="d"> d) {}</label><br>
+            <button onclick="checkAnswer('aq3', 'b')">Submit</button>
+            <p id="feedback-aq3" class="feedback"></p>
+        </div>
+        <div class="content-quiz">
+            <p>Which of the following is true about the power set P({a, b})?</p>
+            <label><input type="radio" name="aq4" value="a"> a) P({a, b}) = {{a, b}}</label><br>
+            <label><input type="radio" name="aq4" value="b"> b) P({a, b}) = {a, b}</label><br>
+            <label><input type="radio" name="aq4" value="c"> c) P({a, b}) = {{}, {a}, {b}, {a, b}}</label><br>
+            <label><input type="radio" name="aq4" value="d"> d) P({a, b}) = {{}, {a, b}}</label><br>
+            <button onclick="checkAnswer('aq4', 'c')">Submit</button>
+            <p id="feedback-aq4" class="feedback"></p>
+        </div>
+        <div class="content-quiz">
+            <p>Given sets A = {x, y, z} and B = {y, z}, which statement is true?</p>
+            <label><input type="radio" name="aq5" value="a"> a) A ⊂ B</label><br>
+            <label><input type="radio" name="aq5" value="b"> b) A ⊆ B</label><br>
+            <label><input type="radio" name="aq5" value="c"> c) B ⊆ A</label><br>
+            <label><input type="radio" name="aq5" value="d"> d) B ⊈ A</label><br>
+            <button onclick="checkAnswer('aq5', 'c')">Submit</button>
+            <p id="feedback-aq5" class="feedback"></p>
+        </div>
+        <div class="nav-buttons">
+            <button onclick="showSetNotations()">Previous: Set Notations</button>
+            <button onclick="showProofs()">Next: Basic Proofs and Properties</button>
+        </div>
+    </div>
+    <div id="proofs" class="section">
+        <div class="container">
+            <h1>Basic Proofs and Properties in Set Theory</h1>
+            <h2>Subset Proof</h2>
+            <p>To prove that <b>A ⊆ B</b>, every element of <b>A</b> must also be in <b>B</b>.</p>
+            <p class="example">Example: Given <b>A = {1, 2}</b> and <b>B = {1, 2, 3}</b>, since all elements of <b>A</b> are found in <b>B</b>, we conclude that <b>A ⊆ B</b>.</p>
+
+            <h2>Set Equality</h2>
+            <p>Two sets <b>A</b> and <b>B</b> are equal if and only if <b>A ⊆ B</b> and <b>B ⊆ A</b>.</p>
+            <p class="example">Example: Sets <b>{1, 2, 3}</b> and <b>{3, 2, 1}</b> are equal because they contain exactly the same elements.</p>
+
+            <h2>Idempotent Laws</h2>
+            <ul>
+                <li><b>Union Idempotent Law:</b> <b>A ∪ A = A</b> (Uniting a set with itself does not change it).</li>
+                <li><b>Intersection Idempotent Law:</b> <b>A ∩ A = A</b> (Intersecting a set with itself gives the same set).</li>
+            </ul>
+
+            <h2>Commutative Laws</h2>
+            <ul>
+                <li><b>Union:</b> <b>A ∪ B = B ∪ A</b></li>
+                <li><b>Intersection:</b> <b>A ∩ B = B ∩ A</b></li>
+            </ul>
+            <p>Order doesn’t matter when uniting or intersecting sets!</p>
+
+            <h2>Associative Laws</h2>
+            <ul>
+                <li><b>Union:</b> <b>(A ∪ B) ∪ C = A ∪ (B ∪ C)</b></li>
+                <li><b>Intersection:</b> <b>(A ∩ B) ∩ C = A ∩ (B ∩ C)</b></li>
+            </ul>
+            <p>When combining three sets, it doesn’t matter which sets you group first.</p>
+
+            <h2>De Morgan’s Laws</h2>
+            <ul>
+                <li><b>First Law:</b> The complement of a union is the intersection of complements: <b>(A ∪ B)' = A' ∩ B'</b></li>
+                <li><b>Second Law:</b> The complement of an intersection is the union of complements: <b>(A ∩ B)' = A' ∪ B'</b></li>
+            </ul>
+        </div>
+        <div class="nav-buttons">
+            <button onclick="showAdditionalQuiz()">Previous: Additional Quiz</button>
+            <button onclick="showBasicProofQuiz()">Next: Quiz on Basic Proofs</button>
+        </div>
+    </div>
+    <div id="basicProofQuiz" class="section">
+        <div class="content-quiz">
+            <h1>Set Theory Quiz: Basic Proofs and Properties</h1>
+            <p>Use set builder notation and logical equivalences to establish the first De Morgan law: <b>A ∩ B = A ∪ B</b>.</p>
+                <button onclick="toggleSolution()">View Solution</button>
+                <div id="solution" class="solution">
+                    <p>Solution:</p>
+                    <img src="real solutions.jpg" alt="Solution Image" />
+                </div>
+        </div>
+        <div class="question">
+            <p>Which of the following correctly demonstrates the Union Idempotent Law?</p>
+            <label><input type="radio" name="bpq1" value="a"> a) A ∪ B = B ∪ A</label><br>
+            <label><input type="radio" name="bpq1" value="b"> b) A ∪ A = A</label><br>
+            <label><input type="radio" name="bpq1" value="c"> c) A ∩ B = A</label><br>
+            <label><input type="radio" name="bpq1" value="d"> d) (A ∪ B) ∪ C = A ∪ (B ∪ C)</label><br>
+            <button onclick="checkAnswer('bpq1', 'b')">Submit</button>
+            <p id="feedback-bpq1" class="feedback"></p>
+        </div>
+        <div class="question">
+            <p>When are two sets A and B considered equal?</p>
+            <label><input type="radio" name="bpq2" value="a"> a) If A ⊆ B and B ⊆ A</label><br>
+            <label><input type="radio" name="bpq2" value="b"> b) If they contain at least one common element</label><br>
+            <label><input type="radio" name="bpq2" value="c"> c) If the number of elements in each set is the same</label><br>
+            <label><input type="radio" name="bpq2" value="d"> d) If A ∩ B = ∅</label><br>
+            <button onclick="checkAnswer('bpq2', 'a')">Submit</button>
+            <p id="feedback-bpq2" class="feedback"></p>
+        </div>
+
+        <!-- Medium Questions -->
+        <div class="question">
+            <p>Which of the following statements is true according to the Commutative Laws?</p>
+            <label><input type="radio" name="bpq3" value="a"> a) A ∩ B = A ∪ B</label><br>
+            <label><input type="radio" name="bpq3" value="b"> b) (A ∩ B) ∩ C = A ∩ (B ∩ C)</label><br>
+            <label><input type="radio" name="bpq3" value="c"> c) A ∩ B = B ∩ A</label><br>
+            <label><input type="radio" name="bpq3" value="d"> d) A ⊆ B implies B ⊆ A</label><br>
+            <button onclick="checkAnswer('bpq3', 'c')">Submit</button>
+            <p id="feedback-bpq3" class="feedback"></p>
+        </div>
+        <div class="question">
+            <p>If A = {1, 2} and B = {1, 2, 3}, which of the following statements is true?</p>
+            <label><input type="radio" name="bpq4" value="a"> a) B ⊆ A</label><br>
+            <label><input type="radio" name="bpq4" value="b"> b) A ∩ B = ∅</label><br>
+            <label><input type="radio" name="bpq4" value="c"> c) A ⊆ B</label><br>
+            <label><input type="radio" name="bpq4" value="d"> d) A = B</label><br>
+            <button onclick="checkAnswer('bpq4', 'c')">Submit</button>
+            <p id="feedback-bpq4" class="feedback"></p>
+        </div>
+
+        <!-- Hard Questions -->
+        <div class="question">
+            <p>According to De Morgan’s Laws, what is the complement of the union of sets A and B?</p>
+            <label><input type="radio" name="bpq5" value="a"> a) (A ∪ B)' = A' ∪ B'</label><br>
+            <label><input type="radio" name="bpq5" value="b"> b) (A ∩ B)' = A' ∩ B'</label><br>
+            <label><input type="radio" name="bpq5" value="c"> c) (A ∪ B)' = A' ∩ B'</label><br>
+            <label><input type="radio" name="bpq5" value="d"> d) (A ∩ B)' = A' ∪ B'</label><br>
+            <button onclick="checkAnswer('bpq5', 'c')">Submit</button>
+            <p id="feedback-bpq5" class="feedback"></p>
+        </div>
+        <div class="question">
+            <p>Which of the following correctly demonstrates the Associative Law for union?</p>
+            <label><input type="radio" name="bpq6" value="a"> a) A ∪ (B ∩ C) = (A ∪ B) ∩ C</label><br>
+            <label><input type="radio" name="bpq6" value="b"> b) (A ∩ B) ∩ C = A ∩ (B ∩ C)</label><br>
+            <label><input type="radio" name="bpq6" value="c"> c) (A ∪ B) ∪ C = A ∪ (B ∪ C)</label><br>
+            <label><input type="radio" name="bpq6" value="d"> d) A ∩ (B ∪ C) = (A ∩ B) ∪ (A ∩ C)</label><br>
+            <button onclick="checkAnswer('bpq6', 'c')">Submit</button>
+            <p id="feedback-bpq6" class="feedback"></p>
+        </div>
+        <div class="nav-buttons">
+            <button onclick="showAdditionalQuiz()">Previous: Additional Quiz</button>
+            <a href="http://localhost:3000/cal" target="_parent" rel="noopener noreferrer">
+                <button >Set Calculator</button>
+            </a>
+            <a href="http://localhost:3000/int" target="_parent" rel="noopener noreferrer">
+                <button >Interactive Quizzes</button>
+            </a>
+            
+            
+
+            <button onclick="showMajorQuiz()">Major Quiz</button>
+        </div>
+        
+        
+        
+    </div>
+    <div id="majorQuiz" class="section">
+        <h1>Major Set Theory Quiz</h1>
+        <div id="quizContainer" class="content-quiz">
+            <!-- Questions will be injected dynamically by JavaScript -->
+        </div>
+        <div class="nav-buttons">
+            <button onclick="showBasicProofQuiz()">Previous: Basic Proofs Quiz</button>
+            <button onclick="handleMajorQuizSubmission()">Submit Quiz</button>
+        </div>
+    </div>
+<!-- Results Container -->
+<div id="resultsContainer" class="content-quiz">
+    <!-- Results will be displayed here after submission -->
+</div>
+    <script>
+
+function checkAnswer(questionId, correctAnswer) {
+    const selectedOption = document.querySelector(`input[name="${questionId}"]:checked`);
+    const feedback = document.getElementById(`feedback-${questionId}`);
+
+    if (selectedOption) {
+        if (selectedOption.value === correctAnswer) {
+            feedback.textContent = 'Correct!';
+            feedback.className = 'feedback correct';
+        } else {
+            feedback.textContent = 'Incorrect. Try again!';
+            feedback.className = 'feedback incorrect';
+        }
+    } else {
+        feedback.textContent = 'Please select an answer.';
+        feedback.className = 'feedback incorrect';
+    }
+}
+
+
+function handleLogin(event) {
+    event.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+
+    if (name && email) {
+        document.getElementById('loginSection').style.display = 'none';
+        document.getElementById('setDefinitions').style.display = 'block';
+    } else {
+        alert('Please enter both name and email.');
+    }
+}
+
+function showDefinitions() {
+    hideAllSections();
+    document.getElementById('setDefinitions').style.display = 'block';
+}
+
+function showQuiz() {
+    hideAllSections();
+    document.getElementById('setTheoryQuiz').style.display = 'block';
+}
+
+function showTypes() {
+    hideAllSections();
+    document.getElementById('typesOfSets').style.display = 'block';
+}
+
+function showSubsetQuiz() {
+    hideAllSections();
+    document.getElementById('subsetQuiz').style.display = 'block';
+}
+
+function showSetNotations() {
+    hideAllSections();
+    document.getElementById('setNotations').style.display = 'block';
+}
+
+function showAdditionalQuiz() {
+    hideAllSections();
+    document.getElementById('additionalQuiz').style.display = 'block';
+}
+
+function showProofs() {
+    hideAllSections();
+    document.getElementById('proofs').style.display = 'block';
+}
+
+function showBasicProofQuiz() {
+    hideAllSections();
+    document.getElementById('basicProofQuiz').style.display = 'block';
+}
+
+function hideAllSections() {
+    document.querySelectorAll('.section').forEach(section => {
+        section.style.display = 'none';
+    });
+}
+
+function showMajorQuiz() {
+    hideAllSections();
+    document.getElementById('majorQuiz').style.display = 'block';
+}
+
+function handleMajorQuizSubmission() {
+    let score = 0;
+    const questions = majorQuizQuestions.slice(0, 15); // No need to map again
+    const resultsContainer = document.getElementById('resultsContainer');
+    resultsContainer.innerHTML = ""; // Clear previous results if any
+
+    questions.forEach((question, index) => {
+        const selectedOption = document.querySelector(`input[name="q${index}"]:checked`);
+        const feedback = document.createElement('p');
+
+        if (selectedOption) {
+            if (selectedOption.value === question.correctAnswer) {
+                score++;
+                feedback.textContent = `Question ${index + 1}: Correct!`;
+                feedback.className = "feedback correct";
+            } else {
+                feedback.textContent = `Question ${index + 1}: Incorrect. Correct Answer: ${question.correctAnswer}`;
+                feedback.className = "feedback incorrect";
+            }
+        } else {
+            feedback.textContent = `Question ${index + 1}: No answer selected. Correct Answer: ${question.correctAnswer}`;
+            feedback.className = "feedback incorrect";
+        }
+        resultsContainer.appendChild(feedback);
+    });
+
+    alert(`Your score: ${score} / ${questions.length}`);
+}
+
+function loadMajorQuiz() {
+    const quizContainer = document.getElementById('quizContainer');
+    const selectedQuestions = majorQuizQuestions
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 15); // Pick 15 random questions
+
+    selectedQuestions.forEach((question, index) => {
+        const questionElem = document.createElement('div');
+        questionElem.innerHTML = `
+            <p>${index + 1}. ${question.question}</p>
+            ${question.options.map((option, i) => `
+                <label>
+                    <input type="radio" name="q${index}" value="${String.fromCharCode(65 + i)}"> ${option}
+                </label><br>
+            `).join('')}
+            <p id="feedback-q${index}" class="feedback"></p>
+        `;
+        quizContainer.appendChild(questionElem);
+    });
+}
+
+// Ensure only one window.onload function is used
+window.onload = function() {
+    hideAllSections();
+    document.getElementById('loginSection').style.display = 'block';
+    loadMajorQuiz(); // Load major quiz questions on page load
+}
+
+
+
+
+        const majorQuizQuestions = [
+            {
+                question: "Which of the following statements is true about the power set of a set?",
+                options: [
+                    "A. The power set of a set with n elements contains n elements.",
+                    "B. The power set of a set contains exactly one element.",
+                    "C. The power set of a set with n elements contains 2^n elements.",
+                    "D. The power set of an infinite set is also finite."
+                ],
+                correctAnswer: "C"
+            },
+            
+            {
+        question: "Which of the following is the correct definition of the union of two sets A and B?",
+        options: [
+            "A. A ∪ B = {x: x ∈ A or x ∈ B}",
+            "B. A ∪ B = {x: x ∈ A and x ∈ B}",
+            "C. A ∪ B = {x: x ∉ A and x ∈ B}",
+            "D. A ∪ B = {x: x ∈ A and x ∉ B}"
+        ],
+        correctAnswer: "A"
+    },
+    {
+        question: "If A = {1, 2, 3, 4} and B = {3, 4, 5, 6}, what is the intersection of sets A and B?",
+        options: [
+            "A. {1, 2, 5, 6}",
+            "B. {3, 4}",
+            "C. {1, 2}",
+            "D. {3, 4, 5}"
+        ],
+        correctAnswer: "B"
+    },
+    {
+        question: "Which of the following is true about finite and infinite sets?",
+        options: [
+            "A. Every finite set is a subset of every infinite set.",
+            "B. A finite set cannot be a subset of an infinite set.",
+            "C. Every infinite set is a subset of a finite set.",
+            "D. Every infinite set has infinitely many subsets."
+        ],
+        correctAnswer: "D"
+    },
+    {
+        question: "What is the cardinality of the power set of a set with 4 elements?",
+        options: [
+            "A. 4",
+            "B. 16",
+            "C. 8",
+            "D. 32"
+        ],
+        correctAnswer: "B"
+    },
+    {
+        question: "Which of the following statements is true about the universal set?",
+        options: [
+            "A. The universal set is always a subset of every other set.",
+            "B. The universal set contains only the elements of a single set.",
+            "C. The universal set contains all possible elements under consideration for a given problem.",
+            "D. The universal set is not necessary in set theory."
+        ],
+        correctAnswer: "C"
+    },
+    {
+        question: "If A = {2, 4, 6, 8} and B = {1, 2, 3, 4, 5}, what is the symmetric difference A △ B?",
+        options: [
+            "A. {1, 3, 5, 6, 8}",
+            "B. {2, 4}",
+            "C. {1, 2, 3, 4, 5, 6, 8}",
+            "D. {6, 8}"
+        ],
+        correctAnswer: "A"
+    },
+    {
+        question: "Which of the following sets is a subset of N, the set of natural numbers?",
+        options: [
+            "A. {-1, 0, 1, 2, 3}",
+            "B. {0, 1, 2, 3}",
+            "C. {2.5, 3.1, 4.0}",
+            "D. {1, 1.5, 2}"
+        ],
+        correctAnswer: "B"
+    },
+    {
+        question: "If A = {1, 2, 3} and B = {3, 4, 5}, what is the union of sets A and B?",
+        options: [
+            "A. {1, 2, 3, 4, 5}",
+            "B. {3}",
+            "C. {1, 2}",
+            "D. {1, 2, 3, 4}"
+        ],
+        correctAnswer: "A"
+    },
+    {
+        question: "True or False: Every set is a subset of its power set.",
+        options: [
+            "A. True",
+            "B. False"
+        ],
+        correctAnswer: "A"
+    },
+    {
+        question: "What is the cardinality of the set P({a, b, c, d}), where P(S) denotes the power set of S?",
+        options: [
+            "A. 8",
+            "B. 16",
+            "C. 4",
+            "D. 32"
+        ],
+        correctAnswer: "B"
+    },
+    {
+        question: "Which of the following is the correct definition of a subset?",
+        options: [
+            "A. A set A is a subset of set B if and only if every element of A is also an element of B, but B can have extra elements.",
+            "B. A set A is a subset of set B if and only if every element of B is also an element of A, but A can have extra elements.",
+            "C. A set A is a subset of set B if and only if there are no elements in A that are not in B.",
+            "D. A set A is a subset of set B if A contains exactly the same elements as B."
+        ],
+        correctAnswer: "A"
+    },
+    {
+        question: "What is the cardinality of the set {∅, {∅}, {{∅}}}?",
+        options: [
+            "A. 3",
+            "B. 4",
+            "C. 2",
+            "D. 5"
+        ],
+        correctAnswer: "A"
+    },
+    {
+        question: "If A = {1, 2, 3, 4} and B = {2, 3, 4, 5}, what is the symmetric difference A △ B?",
+        options: [
+            "A. {1, 2, 3, 4, 5}",
+            "B. {1, 5}",
+            "C. {2, 3, 4}",
+            "D. {1, 2, 3, 4, 5} ∪ ∅"
+        ],
+        correctAnswer: "B"
+    },
+    {
+        question: "True or False: The power set of a finite set is always finite.",
+        options: [
+            "A. True",
+            "B. False"
+        ],
+        correctAnswer: "A"
+    },
+    {
+        question: "If A = {x: x is an even number less than 10} and B = {x: x is a prime number less than 10}, what is A ∩ B?",
+        options: [
+            "A. {2, 4, 6, 8}",
+            "B. {2, 3, 5, 7}",
+            "C. {2}",
+            "D. {4, 6, 8}"
+        ],
+        correctAnswer: "C"
+    },
+    {
+        question: "Which of the following statements is true about the universal set?",
+        options: [
+            "A. The universal set is the set of all possible elements for a given context, and all other sets are subsets of the universal set.",
+            "B. The universal set can be any set and does not need to be related to any context.",
+            "C. The universal set must be the empty set.",
+            "D. The universal set must contain only the elements of the set N."
+        ],
+        correctAnswer: "A"
+    },
+    {
+        question: "What is the result of the union of two disjoint sets A = {1, 2} and B = {3, 4}?",
+        options: [
+            "A. A ∪ B = ∅",
+            "B. A ∪ B = A ∩ B",
+            "C. A ∪ B = A",
+            "D. A ∪ B = A ∪ B, with no common elements between A and B"
+        ],
+        correctAnswer: "D"
+    },
+    {
+        question: "Which of the following is a true statement about infinite sets?",
+        options: [
+            "A. An infinite set cannot have a subset with more than countable elements.",
+            "B. Every infinite set is countable.",
+            "C. Every infinite set has a finite cardinality.",
+            "D. Infinite sets always have the same cardinality."
+        ],
+        correctAnswer: "D"
+    },
+    {
+        question: "True or False: The set {1, 2, 3} is a subset of the set {1, 2, 3, 4}, but not an element of it.",
+        options: [
+            "A. True",
+            "B. False"
+        ],
+        correctAnswer: "A"
+    },
+    {
+        question: "If A = {1, 2, 3, 4, 5}, what is the number of subsets of A that contain exactly 3 elements?",
+        options: [
+            "A. 5",
+            "B. 10",
+            "C. 15",
+            "D. 20"
+        ],
+        correctAnswer: "B"
+    },
+    {
+        question: "If U = {1, 2, 3, 4, 5, 6, 7} is the universal set and A = {1, 2, 3}, what is the complement of A in U?",
+        options: [
+            "A. {1, 2, 3}",
+            "B. {4, 5, 6, 7}",
+            "C. {3, 4, 5, 6, 7}",
+            "D. {1, 2, 3, 4, 5, 6, 7}"
+        ],
+        correctAnswer: "B"
+    },
+    {
+        question: "Which of the following is the correct definition of 'belongs to' in set theory?",
+        options: [
+            "A. x ∈ A means x is an element of set A.",
+            "B. x ∈ A means A is a subset of x.",
+            "C. x ∈ A means x is a proper subset of set A.",
+            "D. x ∈ A means x is equal to set A."
+        ],
+        correctAnswer: "A"
+    },
+    {
+        question: "True or False: The set of real numbers R is a subset of the set of complex numbers C.",
+        options: [
+            "A. True",
+            "B. False"
+        ],
+        correctAnswer: "A"
+    },
+    {
+        question: "What is the result of the symmetric difference between two disjoint sets A = {1, 2} and B = {3, 4}?",
+        options: [
+            "A. {1, 2, 3, 4}",
+            "B. {1, 2}",
+            "C. {3, 4}",
+            "D. ∅"
+        ],
+        correctAnswer: "A"
+    },
+    {
+        question: "If A = {x | x is an even number} and B = {2, 4, 6, 8}, which statement is correct?",
+        options: [
+            "A. B is a subset of A",
+            "B. A is a subset of B",
+            "C. A and B are equal",
+            "D. None of the above"
+        ],
+        correctAnswer: "A"
+    },
+    {
+        question: "The complement of an intersection of sets A and B is given by which of the following?",
+        options: [
+            "A. (A ∩ B)' = A' ∩ B'",
+            "B. (A ∩ B)' = A' ∪ B'",
+            "C. (A ∪ B)' = A' ∩ B'",
+            "D. (A ∪ B)' = A' ∪ B'"
+        ],
+        correctAnswer: "B"
+    },
+    {
+        question: "If the universal set U = {1, 2, 3, 4, 5, 6} and A = {2, 4, 6}, what is A' (the complement of A)?",
+        options: [
+            "A. {1, 2, 3, 4, 5}",
+            "B. {2, 4, 6}",
+            "C. {1, 3, 5}",
+            "D. {1, 2, 3, 4, 5, 6}"
+        ],
+        correctAnswer: "C"
+    },
+    {
+        question: "Which of the following best describes a disjoint set?",
+        options: [
+            "A. Sets with no common elements",
+            "B. Sets with exactly one element in common",
+            "C. Sets that are equal",
+            "D. Sets that are subsets of each other"
+        ],
+        correctAnswer: "A"
+    },
+    {
+        question: "The union of two sets A = {1, 2} and B = {2, 3} is:",
+        options: [
+            "A. {2}",
+            "B. {1, 2, 3}",
+            "C. {1, 2}",
+            "D. {2, 3}"
+        ],
+        correctAnswer: "B"
+    },
+    {
+        question: "Which of the following statements is true about the power set of the empty set?",
+        options: [
+            "A. It contains one subset",
+            "B. It contains two subsets",
+            "C. It contains no subsets",
+            "D. It contains infinitely many subsets"
+        ],
+        correctAnswer: "A"
+    }
+        ];
+
+    </script>
+</body>
+</html>

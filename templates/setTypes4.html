@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Theory Web App - Types of Sets & Set Notations</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 0;
+            margin: 0; 
+            background: linear-gradient(to bottom right, #f0f8ff, #e6f7ff);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .content-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            max-width: 1200px;
+            width: 100%;
+            padding: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #004080;
+        }
+        .content, .content-quiz, .login-container, .box {
+            background: #fff;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+            text-align: left;
+        }
+        p, ul {
+            margin-bottom: 15px;
+        }
+        ul li {
+            margin-bottom: 8px;
+        }
+        .nav-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+        button {
+            padding: 12px;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: linear-gradient(135deg, #0056b3, #003f8a);
+        }
+    </style>
+</head>
+<body>
+    <div class="content-container">
+        <div id="typesOfSets" class="section">
+            <h1>Exploring Types of Sets</h1>
+            <div class="content-wrapper" style="display: flex; flex-wrap: wrap; gap: 50px; justify-content: center;">
+                <!-- Box 1 -->
+                <div class="box">
+                    <p><b>Finite Set:</b> A set with a limited, countable number of elements.</p>
+                    <p><b>Example:</b> <code>{red, green, blue}</code> is finite because it has three specific elements.</p>
+                </div>
+                <!-- Box 2 -->
+                <div class="box">
+                    <p><b>Infinite Set:</b> A set that goes on without end, like the set of natural numbers <code>{1, 2, 3, ...}</code>.</p>
+                </div>
+                <!-- Box 3 -->
+                <div class="box">
+                    <p><b>Equal Sets:</b> Two sets that contain exactly the same elements. Order doesn’t matter, just the contents.</p>
+                    <p><b>Example:</b> <code>{a, b, c}</code> and <code>{c, a, b}</code> are equal.</p>
+                </div>
+                <!-- Box 4 -->
+                <div class="box">
+                    <p><b>Equivalent Sets:</b> Sets that have the same number of elements, though the elements themselves might differ.</p>
+                    <p><b>Example:</b> <code>{dog, cat, bird}</code> and <code>{red, blue, green}</code> are equivalent because each has three items.</p>
+                </div>
+                <!-- Box 5 -->
+                <div class="box">
+                    <p><b>Singleton Set:</b> A set with just a single element.</p>
+                    <p><b>Example:</b> <code>{x}</code> where <code>x</code> could be any element, but there’s only one.</p>
+                </div>
+                <!-- Box 6 -->
+                <div class="box">
+                    <p><b>Disjoint Sets:</b> Sets that have no elements in common—no overlap.</p>
+                    <p><b>Example:</b> <code>{1, 2, 3}</code> and <code>{4, 5, 6}</code> have nothing in common, so they’re disjoint.</p>
+                </div>
+                <!-- Box 7 -->
+                <div class="box">
+                    <p><b>Overlapping Sets:</b> Sets that share at least one common element.</p>
+                    <p><b>Example:</b> <code>{1, 2, 3}</code> and <code>{2, 4, 6}</code> overlap because they both contain <code>2</code>.</p>
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <button onclick="goToPreviouss()">Previous: Quiz</button>
+                <button onclick="goToNextt()">Next: Quiz 5</button>
+            </div>
+            
+        </div>
+    </div>
+    <script src="webApp.js"></script>
+</body>
+</html>
